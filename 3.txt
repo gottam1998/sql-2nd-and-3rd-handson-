@@ -1,0 +1,131 @@
+
+//CUSTOMER  Table
+
+create table CUSTOMER (CUSTID int, FNAME varchar(30), LNAME varchar(30), ADDRESS varchar(50),PHONENO  int Not Null, CITY varchar(20), COUNTRY varchar(20), DATEFIRSTPURCHASED date, SUPPLIERID int,PRIMARY KEY (CUSTID),
+ CONSTRAINT FK_SupplierId FOREIGN KEY (SUPPLIERID)
+ REFERENCES SUPPLIER(SUPPLIERID));
+
+
+
+insert into CUSTOMER values (1001,"Das","Jeyaseelan","119, park Avenue, II street",9841093428,"Coimbatore","India","2004-01-10",1);
+
+
+
+insert into CUSTOMER values (2001,"Gopi","Govindraj","241, I floor, Kamaraj street , Madippakkam",9444124590,"Chennai","India","2005-03-25",4);
+
+
+
+insert into CUSTOMER values (1201,"Dilip","Kishore","43, II Avenue, Anna Nagar",9997234534,"Bangalore","India","2004-08-20",2);
+
+
+
+insert into CUSTOMER values (1300,"Aanand","Chowdhury","42/1 sector 1, II Street",9841054348,"Bangalore","India","2005-05-15",2);
+
+
+
+insert into CUSTOMER values (1220,"Chandra","Nagarajan","83, lal bagh",98410672356,"Bangalore","India","2006-02-12",4);
+
+
+
+insert into CUSTOMER values (1221,"Abhishek","Kumar","13,kishori park",94447623901,"Chennai","India","2004-05-15",1);
+
+
+
+insert into CUSTOMER values (1320,"Nikhil","Pandit","218, alwaanya street",94448923091,"Salem","India","2006-04-21",3);
+
+
+
+insert into CUSTOMER values (1222,"Meenu","Monica","C11, church road",98410563421,"Trichy","India","2004-08-30",1);
+
+
+
+insert into CUSTOMER values (1225,"Pavan","Kumar","128/A, North Mada Street",99934782103,"Maduari","India","2004-08-18",4);
+
+
+
+select * from CUSTOMER;
+
+//ORDERS Table
+
+create table ORDERS (ORDERID int , ORDERDATE date, CUSTID int, QUANTITY int, ITEMID int,PRIMARY KEY (ORDERID),CONSTRAINT FK_ItemId FOREIGN KEY (ITEMID) REFERENCES SUPPLIER(ITEMID));
+
+
+
+insert into ORDERS values (1,"12-01-2004",1001,30,25);
+
+
+
+insert into ORDERS values (2,"6-05-2005",1202,38,24);
+
+
+
+insert into ORDERS values (3,"16-12-2006",1220,10,22);
+
+
+
+insert into ORDERS values (4,"21-05-2004",1233,12,21);
+
+
+
+select * from ORDERS;
+
+//ITEMS Table
+
+
+
+
+
+
+create table ITEMS (ITEMID int, ITEMNAME varchar(35), SUPPLIERID int , MINQTY int, MAXQTY int,PRICE float numeric(5,2),PRIMARY KEY (ITEMID),CONSTRAINT FK_SupplierId FOREIGN KEY (SUPPLIERID)
+ REFERENCES SUPPLIER(SUPPLIERID));
+
+
+
+
+insert into ITEMS values (20,"Pears Soap",4,7,20,30.00);
+
+
+
+insert into ITEMS values (21,"V.V.D. Coconut oil 200 ml",2,8,15,79.00);
+
+
+
+insert into ITEMS values (22,"Ponds powder 400g",3,6,25,106.00);
+
+
+
+insert into ITEMS values (23,"Reynolds pen- blue",1,10,30,15.00);
+
+
+
+insert into ITEMS values (24,"Reynolds pen- black",1,10,30,16.00);
+
+
+
+insert into ITEMS values (25,"Mysore sandal soap",4,7,25,25.00);
+
+
+
+insert into ITEMS values (26,"Fair & lovely cream- 50g",3,5,15,55.00);
+
+
+
+insert into ITEMS values (27,"Rexono deo spary",2,5,20,100.00);
+
+
+
+insert into ITEMS values (28,"Dove soap",4,7,15,85.00);
+
+
+
+select * from ITEMS;
+
+
+
+
+
+select CUSTOMER.FNAME, CUSTOMER.CITY , CUSTOMER.COUNTRY from CUSTOMER where CUSTOMER.CITY="Madurai" or  CUSTOMER.CITY= "Salem" or  CUSTOMER.CITY= "Chennai";
+
+select  CUSTOMER.CUSTID, CUSTOMER.FNAME, CUSTOMER.LNAME, CUSTOMER.DATEFIRSTPURCHASED,ITEMS.ITEMNAME, ITEMS.PRICE from CUSTOMER, ORDERS, ITEMS WHERE ORDERS.CUSTID=CUSTOMER.CUSTID AND ORDERS.ITEMID=ITEMS.ITEMID;
+
+select * from ORDERS where ITEMID=(select ITEMID from ITEMS where ITEMNAME="Dove soap");

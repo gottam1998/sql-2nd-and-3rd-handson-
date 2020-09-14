@@ -1,0 +1,182 @@
+// wORLDCITY TABLE
+create table WORLDCITY (City varchar(30), Country varchar(30), Continent varchar(30), Latitude float, NorthSouth varchar(30), Longitude float, EastWest varchar(30));
+insert into WORLDCITY values ("Athens","Greece","Europe",37.59,"N",23.44,"E");
+insert into WORLDCITY values ("Atlanta","United States","North America",33.45,"N",84.23,"W");
+insert into WORLDCITY values ("Dallas","United States","North America",32.47,"N",96.47,"W");
+insert into WORLDCITY values ("Nashville","United States","North America",36.09,"N",86.46,"W");
+insert into WORLDCITY values ("Victoria","Canada","North America",48.25,"N",123.21,"W");
+insert into WORLDCITY values ("Peterborough","Canada","North America",44.18,"N",79.18,"W");
+insert into WORLDCITY values ("Vancouver","Canada","North America",49.18,"N",123.04,"W");
+insert into WORLDCITY values ("Toledo","United States","North America",41.39,"N",83.82,"W");
+insert into WORLDCITY values ("Warsaw","Poland","Europe",52.15,"N",21.00,"E");
+insert into WORLDCITY values ("Lima","Peru","South America",12.03,"S",77.03,"W");
+insert into WORLDCITY values ("Rio De Janeiro","Brazil","South America",22.43,"S",43.13,"W");
+insert into WORLDCITY values ("Santiago","Chile","South America",33.27,"S",70.40,"W");
+insert into WORLDCITY values ("Bogota","Colombia","South America",04.36,"N",74.05,"W");
+insert into WORLDCITY values ("Buenos Aires","Argentina","South America",34.36,"S",58.28,"W");
+insert into WORLDCITY values ("Quito","Ecuador","South America",00.13,"S",78.30,"W");
+insert into WORLDCITY values ("Caracas","Venezuela","South America",10.30,"N",66.56,"W");
+insert into WORLDCITY values ("Madras","India","Asia",28.36,"N",77.12,"E");
+insert into WORLDCITY values ("Bombay","India","Asia",18.58,"N",72.50,"E");
+insert into WORLDCITY values ("Manchester","England","Europe",51.30,"N",0.0,null);
+insert into WORLDCITY values ("Moscow","Russia","Europe",55.45,"N",37.35,"E");
+insert into WORLDCITY values ("Paris","France","Europe",48.52,"N",2.20,"E");
+insert into WORLDCITY values ("Shenyang","China","Asia",41.48,"N",123.27,"E");
+insert into WORLDCITY values ("Cairo","Egypt","Africa",30.03,"N",31.15,"E");
+insert into WORLDCITY values ("Tripoli","Lybia","Africa",32.54,"N",13.11,"E");
+insert into WORLDCITY values ("Beijing","China","Asia",39.56,"N",116.24,"E");
+insert into WORLDCITY values ("Rome","Italy","Europe",41.54,"N",12.29,"E");
+insert into WORLDCITY values ("Tokyo","Japan","Asia",35.42,"N",139.46,"E");
+insert into WORLDCITY values ("Sydney","Australia","Australia",33.52,"S",151.13,"E");
+insert into WORLDCITY values ("Sparta","Greece","Europe",37.05,"N",22.27,"E");
+insert into WORLDCITY values ("Madrid","Spain","Europe",40.24,"N",3.41,"W");
+
+select * from WORLDCITY;
+
+select DISTINCT Country, Continent from WORLDCITY;
+
+select City,Country from WORLDCITY where City like 'R%';
+
+select City,Country from WORLDCITY where City like '%a';
+
+select City,Country from WORLDCITY where City like 'M_____';
+
+select City,Country from WORLDCITY where City like '_A%';
+
+
+
+//CUSTOMER  Table
+
+create table CUSTOMER (CUSTID int, FNAME varchar(30), LNAME varchar(30), ADDRESS varchar(50),PHONENO  int Not Null, CITY varchar(20), COUNTRY varchar(20), DATEFIRSTPURCHASED date, SUPPLIERID int,PRIMARY KEY (CUSTID),
+ CONSTRAINT FK_SupplierId FOREIGN KEY (SUPPLIERID)
+ REFERENCES SUPPLIER(SUPPLIERID));
+
+
+
+insert into CUSTOMER values (1001,"Das","Jeyaseelan","119, park Avenue, II street",9841093428,"Coimbatore","India","2004-01-10",1);
+
+
+
+insert into CUSTOMER values (2001,"Gopi","Govindraj","241, I floor, Kamaraj street , Madippakkam",9444124590,"Chennai","India","2005-03-25",4);
+
+
+
+insert into CUSTOMER values (1201,"Dilip","Kishore","43, II Avenue, Anna Nagar",9997234534,"Bangalore","India","2004-08-20",2);
+
+
+
+insert into CUSTOMER values (1300,"Aanand","Chowdhury","42/1 sector 1, II Street",9841054348,"Bangalore","India","2005-05-15",2);
+
+
+
+insert into CUSTOMER values (1220,"Chandra","Nagarajan","83, lal bagh",98410672356,"Bangalore","India","2006-02-12",4);
+
+
+
+insert into CUSTOMER values (1221,"Abhishek","Kumar","13,kishori park",94447623901,"Chennai","India","2004-05-15",1);
+
+
+
+insert into CUSTOMER values (1320,"Nikhil","Pandit","218, alwaanya street",94448923091,"Salem","India","2006-04-21",3);
+
+
+
+insert into CUSTOMER values (1222,"Meenu","Monica","C11, church road",98410563421,"Trichy","India","2004-08-30",1);
+
+
+
+insert into CUSTOMER values (1225,"Pavan","Kumar","128/A, North Mada Street",99934782103,"maduari","India","2004-08-18",4);
+
+
+
+select * from CUSTOMER;
+
+//ORDERS Table
+
+create table ORDERS (ORDERID int , ORDERDATE date, CUSTID int, QUANTITY int, ITEMID int,PRIMARY KEY (ORDERID),CONSTRAINT FK_ItemId FOREIGN KEY (ITEMID) REFERENCES SUPPLIER(ITEMID));
+
+
+
+insert into ORDERS values (1,"12-01-2004",1001,30,25);
+
+
+
+insert into ORDERS values (2,"6-05-2005",1202,38,24);
+
+
+
+insert into ORDERS values (3,"16-12-2006",1220,10,22);
+
+
+
+insert into ORDERS values (4,"21-05-2004",1233,12,21);
+
+
+
+select * from ORDERS;
+
+//ITEMS Table
+
+
+
+
+
+
+create table ITEMS (ITEMID int, ITEMNAME varchar(35), SUPPLIERID int , MINQTY int, MAXQTY int,PRICE float numeric(5,2),PRIMARY KEY (ITEMID),CONSTRAINT FK_SupplierId FOREIGN KEY (SUPPLIERID)
+ REFERENCES SUPPLIER(SUPPLIERID));
+
+
+
+
+insert into ITEMS values (20,"Pears Soap",4,7,20,30.00);
+
+
+
+insert into ITEMS values (21,"V.V.D. Coconut oil 200 ml",2,8,15,79.00);
+
+
+
+insert into ITEMS values (22,"Ponds powder 400g",3,6,25,106.00);
+
+
+
+insert into ITEMS values (23,"Reynolds pen- blue",1,10,30,15.00);
+
+
+
+insert into ITEMS values (24,"Reynolds pen- black",1,10,30,16.00);
+
+
+
+insert into ITEMS values (25,"Mysore sandal soap",4,7,25,25.00);
+
+
+
+insert into ITEMS values (26,"Fair & lovely cream- 50g",3,5,15,55.00);
+
+
+
+insert into ITEMS values (27,"Rexono deo spary",2,5,20,100.00);
+
+
+
+insert into ITEMS values (28,"Dove soap",4,7,15,85.00);
+
+
+
+select * from ITEMS;
+
+
+
+
+select MAX(ITEMS.PRICE) from ORDERS, ITEMS where ITEMS.ITEMID = ORDERS.ITEMID;
+
+select MIN(ITEMS.PRICE) from ORDERS, ITEMS where ITEMS.ITEMID = ORDERS.ITEMID;
+
+select CITY, COUNT(CUSTID) from CUSTOMER group by CITY;
+
+select CITY, COUNT(CUSTID) from CUSTOMER group by CITY having COUNT(CUSTID)>1;
+
+select ITEMS.ITEMNAME, ITEMS.MINQTY*ITEMS.PRICE, ITEMS.MAXQTY*ITEMS.PRICE from ORDERS, ITEMS where ITEMS.ITEMID = ORDERS.ITEMID and (ITEMS.MAXQTY* ITEMS.PRICE)>190.00;;
+
+select ORDERS.CUSTID, COUNT(ORDERS.CUSTID) from CUSTOMER, ORDERS, ITEMS where ORDERS.CUSTID=CUSTOMER.CUSTID and ORDERS.ITEMID = ITEMS.ITEMID;
